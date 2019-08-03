@@ -1,0 +1,18 @@
+.ColorBox {
+  height: 25%;
+  width: 20%;
+  margin: 0 auto;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  background: red;
+
+  transition: all .3s;
+}
+
+.ColorBox::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+}
