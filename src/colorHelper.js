@@ -1,3 +1,4 @@
+// REFERENCE DATA OBJECT:
 // export default [
 // {
 //   paletteName: "Material UI Colors",

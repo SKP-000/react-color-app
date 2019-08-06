@@ -13,6 +13,7 @@ class Palette extends Component {
   state = {
     level: 500,
     format: 'hex',
+    snackbarOpen: false,
     colorFormat: 'HEX - #AB7C90'
   }
 
@@ -32,9 +33,16 @@ class Palette extends Component {
 
   // To be passed into Navbar and used in Select component in Navbar
   changeFormat = evt => {
-    this.setState({ format: evt.target.value }, () => {
+    this.setState({ format: evt.target.value, snackbarOpen: true }, () => {
       this.setState({ colorFormat: this.colorFormatHandler() });
     });
+    setTimeout(() => {
+      this.setState({ snackbarOpen: false })
+    }, 2000);
+  }
+
+  closeSnackbar = () => {
+    this.setState({ snackbarOpen: false });
   }
 
   render() {
@@ -51,7 +59,9 @@ class Palette extends Component {
           level={level}
           changeLevel={this.changeLevel}
           handleChange={this.changeFormat}
+          closeSnackbar={this.closeSnackbar}
           colorFormat={this.state.format}
+          open={this.state.snackbarOpen}
         />
         <div className="Palette-colors">
           {ColorBoxes}

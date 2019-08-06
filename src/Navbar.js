@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import Slider from 'rc-slider';
+import Snackbar from '@material-ui/core/Snackbar';
+import CloseIcon from '@material-ui/icons/Close';
+import { IconButton } from '@material-ui/core';
 import 'rc-slider/assets/index.css';
 import './Navbar.css';
 
 export default class Navbar extends Component {
+
   render() {
     const { level, changeLevel } = this.props;
     return (
@@ -46,13 +48,35 @@ export default class Navbar extends Component {
               className='format-selector'
           >
             
-            <MenuItem value='hex'>HEX - #ffffff</MenuItem>
-            <MenuItem value='rgb'>RGB - rgb(255, 255, 255)</MenuItem>
-            <MenuItem value='rgba'>RGBA - rgba(255, 255, 255, 1.0)</MenuItem> 
+            <MenuItem value='hex'>HEX - #AB7C90</MenuItem>
+            <MenuItem value='rgb'>RGB - rgb(237, 222, 140)</MenuItem>
+            <MenuItem value='rgba'>RGBA - rgba(237, 222, 140, 0.8)</MenuItem> 
 
             </Select>
         </div>
 
+        <Snackbar
+          className='snackbar'
+          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+          open={this.props.open}
+          autoHideDuration={3000} // 3000 ms
+          message={
+            <span id='message-id' className='snackbar-message'>
+              Format Changed to: <span className='snackbar-colortext'>{this.props.colorFormat}</span>
+            </span>
+          }
+          ContentProps={{
+            "aria-describedby": "message-id"
+          }}
+          onClose={this.props.closeSnackbar}
+          action={
+            [
+              <IconButton onClick={this.props.closeSnackbar}>
+                <CloseIcon className='snackbar-close' />
+              </IconButton>
+            ]
+          }
+        />
 
       </header>
     )

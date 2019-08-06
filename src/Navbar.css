@@ -4,10 +4,7 @@
   align-items: center;
   justify-content: flex-start;
   height: 10vh;
-  z-index: 5;
   margin-top: -6vh;
-
-  position: relative;
 }
 
 .logo {
@@ -71,4 +68,36 @@
   width: 20rem;
   text-align: center;
   font-weight: 300;
+}
+
+.snackbar {
+  transform: translateX(-10%) translateY(0%);
+  animation: fadeIn .7s;
+  position: relative;
+}
+
+.snackbar-message {
+  text-transform: uppercase;
+  color: #929292;
+}
+
+.snackbar-colortext {
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 300;
+}
+
+.snackbar-close {
+  color: #fff;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: translateX(-10%) translateY(125%);
+  }
+
+  100% {
+    transform: translateX(-10%) translateY(0%);
+  }
+
 }
