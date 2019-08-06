@@ -2,9 +2,8 @@
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  height: 10vh;
-  margin-top: -6vh;
+  height: 8vh;
+  border-bottom: 2px solid #d8d8d8;
 }
 
 .logo {
@@ -12,7 +11,6 @@
  background-color: #eceff1;
  font-size: 22px;
  margin-right: 15px;
- margin-top: .5rem;
  padding: 0 13px;
  font-family: Roboto;
  align-self: stretch;
@@ -31,7 +29,6 @@
   display: flex;
   align-items: center;
   margin-right: auto;
-  margin-top: .5rem;
 }
 
 .slider-level {
@@ -61,7 +58,6 @@
 
 .Navbar-selector {
   margin-right: 2rem;
-  margin-top: .5rem;
 }
 
 .format-selector {

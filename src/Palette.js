@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
+import Footer from './Footer';
 import './Palette.css';
 
 class Palette extends Component {
@@ -46,10 +47,14 @@ class Palette extends Component {
   }
 
   render() {
-    const { colors } = this.props.palette;
+    const { colors, paletteName, emoji } = this.props.palette;
     const { level } = this.state;
     const ColorBoxes = colors[level].map(colorDetails => (
-      <ColorBox background={colorDetails[this.state.format]} name={colorDetails.name} />
+      <ColorBox
+        background={colorDetails[this.state.format]}
+        name={colorDetails.name}
+        key={colorDetails.id}
+      />
     ));
 
     return (
@@ -68,7 +73,10 @@ class Palette extends Component {
           {/* a bunch of color boxes here. TODO */}
         </div>
         {/* Footer here... eventually. TODO */}
-        Footer here
+        <Footer
+          paletteName={paletteName}
+          emoji={emoji}
+          />
       </div>
     )
   }
