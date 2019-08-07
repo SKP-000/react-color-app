@@ -38,6 +38,7 @@ const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
  * - After all this is done, in the generatePalette function we then finally define our values in the color object i.e the levels (50, 100, 200, etc) and push the color scale into the array
  */
 
+ // main function
 function generatePalette(starterPalette) {
   let newPalette = {
     paletteName: starterPalette.paletteName,
@@ -81,6 +82,7 @@ function generatePalette(starterPalette) {
  * The getRange function generates a range of colors with the endpoint being complete white and the start point being a darkened version of the base color 
  */
 
+// helper function
 function getRange(hexColor) {
   const end = '#fff';
   return [
@@ -90,6 +92,7 @@ function getRange(hexColor) {
   ];
 }
 
+// helper function
 function generateScale(hexColor, numOfColors) {
   return chroma.scale(getRange(hexColor)).mode("lab").colors(numOfColors);
 }
