@@ -16,6 +16,7 @@ import styled from 'styled-components';
 const Root = styled.div`
   display: flex;
   flex-direction: column;
+  flex-basis: 30%;
 
   background-color: white;
   border: 1px solid black;
@@ -64,6 +65,11 @@ const MiniColor = styled.div`
 `;
 
 class MiniPalette extends Component {
+
+  handleClick = () => {
+    this.props.goToPalette(this.props.id);
+  }
+
   render() {
     const { paletteName: name, emoji, colors } = this.props;
     const miniColorBoxes = colors.map(color => (
@@ -73,7 +79,7 @@ class MiniPalette extends Component {
     ))
 
     return (
-      <Root color="#000" fontColor="#fca">
+      <Root color="#000" fontColor="#fca" onClick={this.handleClick}>
         <Colors>
           {miniColorBoxes}
         </Colors>

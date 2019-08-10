@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import MiniPalette from './MiniPalette';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import './PaletteList.css';
 
@@ -17,6 +17,7 @@ const Root = styled.div`
 
 const Container = styled.div`
   width: 50%;
+  padding: .5rem;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -28,6 +29,18 @@ const Nav = styled.nav`
   color: white;
   width: 100%;
   justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+    
+  }
 `;
 
 const Palettes = styled.div`
@@ -38,12 +51,11 @@ const Palettes = styled.div`
   grid-gap: 5%;
 `;
 
-const PaletteLink = styled.a`
-  text-decoration: none;
-  color: inherit;
-`;
-
 class PaletteList extends Component {
+
+  goToPalette = (id) => {
+    this.props.history.push(`/palette/${id}`);
+  }
 
   render() {
     const { palettes } = this.props;
@@ -52,14 +64,17 @@ class PaletteList extends Component {
         <Container>
           
           <Nav>
-              <h1 className="title">React Colors App</h1>
+            <h1 className="title">React Colors App</h1>
+            <Link exact to='/'>Create Palette</Link>
           </Nav>
 
           <Palettes>
             {palettes.map(palette => 
-              <PaletteLink as={Link} exact to={`/palette/${palette.id}`}>
-                <MiniPalette {...palette} />
-              </PaletteLink>
+              <MiniPalette
+                {...palette}
+                key={palette.paletteName}
+                goToPalette={this.goToPalette}
+                />
             )}
           </Palettes>
 
