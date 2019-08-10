@@ -9,7 +9,6 @@ body {
   margin: 0 auto;
   position: relative;
   cursor: pointer;
-  background: red;
   text-transform: uppercase;
   user-select: none;
 
@@ -60,6 +59,7 @@ body {
   color: #f0ffff;
   font-weight: 600;
   font-size: 14px;
+  width: 69%;
 
   transform: translateX(5px) translateY(-5px);
 }

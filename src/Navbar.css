@@ -21,6 +21,11 @@
  color: black;
 }
 
+.logo-link:active, .logo-link:focus, .logo-link:link {
+  text-decoration: none;
+  color: black;
+}
+
 .slider {
   width: 340px;
   display: inline-block;
