@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Link } from 'react-router-dom';
 import './ColorBox.css';
 
 export default class ColorBox extends Component {
 
   state = {
     copied: false
+  }
+
+  // An onClick handler function which stops any further events from happening (in our case, the copy) when the user clicks the More button on the color box
+  stopCopy = evt => {
+    evt.stopPropagation();
   }
 
   changeCopyState = evt => {
@@ -40,7 +46,9 @@ export default class ColorBox extends Component {
           </div>
         </CopyToClipboard>
 
-        <span className="see-more">More</span>
+        <Link exact to='/' onClick={this.stopCopy}>
+          <span className="see-more">More</span>
+        </Link>
       </div>
     )
   }
