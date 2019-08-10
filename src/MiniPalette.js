@@ -31,8 +31,11 @@ const Root = styled.div`
 `;
 
 const Colors = styled.div`
-  background-color: grey;
+  height: 110px;
+  width: 100%;
 
+  border-radius: 5px;
+  overflow: hidden;
 `;
 
 const Title = styled.h5`
@@ -51,14 +54,28 @@ const Title = styled.h5`
 
 `;
 
+const MiniColor = styled.div`
+  width: 20%;
+  height: 25%;
+  display: inline-block;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: -3.5px;
+`;
+
 class MiniPalette extends Component {
   render() {
-    const { paletteName: name, emoji } = this.props;
+    const { paletteName: name, emoji, colors } = this.props;
+    const miniColorBoxes = colors.map(color => (
+      <MiniColor style={{ background: color.color }} key={color.name}>
+        
+      </MiniColor>
+    ))
 
     return (
       <Root color="#000" fontColor="#fca">
         <Colors>
-          
+          {miniColorBoxes}
         </Colors>
 
         <Title>{name} <span>{emoji}</span></Title>
