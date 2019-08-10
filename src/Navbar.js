@@ -18,7 +18,6 @@ export default class Navbar extends Component {
         
         <div className="logo">
           <Link
-            exact
             to="/"
             className="logo-link"
           >

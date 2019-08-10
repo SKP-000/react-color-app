@@ -65,7 +65,7 @@ function generatePalette(starterPalette) {
     for (let i in scale) {
       newPalette.colors[levels[i]].push({
         name: `${color.name} ${levels[i]}`,
-        id: color.name.toLowerCase().replace(/ g/, "-"), // would return something like nephritis-100
+        id: color.name.replace(/\s+/g, "-").toLowerCase(), // would return something like nephritis-100
         hex: scale[i],
         rgb: chroma(scale[i]).css(),
         rgba: chroma(scale[i]).css().replace("rgb", "rgba").replace(")", ", 1.0)")
