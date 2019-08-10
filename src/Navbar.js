@@ -12,7 +12,7 @@ import './Navbar.css';
 export default class Navbar extends Component {
 
   render() {
-    const { level, changeLevel } = this.props;
+    const { level, changeLevel, showSlider } = this.props;
     return (
       <header className="Navbar">
         
@@ -25,26 +25,28 @@ export default class Navbar extends Component {
           </Link>
         </div>
 
-        <div className="slider">
-          <h1 className="slider-level">Level: {level}</h1>
+        {showSlider && (
+          <div className="slider">
+            <h1 className="slider-level">Level: {level}</h1>
 
-          <Slider
-            min={100}
-            max={900}
-            step={100}
-            defaultValue={level}
-            onAfterChange={changeLevel}
+            <Slider
+              min={100}
+              max={900}
+              step={100}
+              defaultValue={level}
+              onAfterChange={changeLevel}
 
-            trackStyle={{
-              backgroundColor: 'transparent'
-            }}
+              trackStyle={{
+                backgroundColor: 'transparent'
+              }}
 
-            railStyle={{
-              height: '8px'
-            }}
+              railStyle={{
+                height: '8px'
+              }}
 
-            />
-        </div>
+              />
+          </div>
+        )}
 
         <div className="Navbar-selector">
             <Select 

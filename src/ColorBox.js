@@ -19,21 +19,41 @@ const Root = styled.div`
   &:hover .copy-button {
     opacity: 1;
   }
+
 `;
 
 const GoBack = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: inline-block;
   color: white;
-`;
-
-const GoBackBtn = styled.a`
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
   color: inherit;
-  width: 100%;
-  font-size: 2rem;
+
+  &:hover .copy-button {
+    color: #ccc;
+  }
+
+  .copy-button {
+    border: 0;
+    outline: 0;
+    opacity: 1;
+    color: white;
+    background-color: rgba(255, 255, 255, .1);
+    border: 2px solid rgba(229, 241, 241, .15);
+    font-size: 1.3rem;
+    padding: .5rem 1.5rem;
+    border-radius: 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 700;
+
+    transition: all .3s;
+  }
 `;
 
 export default class ColorBox extends Component {
@@ -54,11 +74,14 @@ export default class ColorBox extends Component {
   }
 
   render() {
-    const { background, name, paletteId, id, showLink, height, canCopy } = this.props;
+    const { background, name, paletteId, id, showLink, height, canCopy, isGoBackBox } = this.props;
     const { copied } = this.state;
     return (
         
-      <Root background={background} height={height}>
+      <Root
+        background={background}
+        height={height}
+      >
         {canCopy && (
           <div>
             <div className={`copy-overlay ${copied ? 'show' : ''}`} style={{ background }} />
@@ -69,15 +92,13 @@ export default class ColorBox extends Component {
           </div>
         )}
         
-        {id === 'react-logo' && (
-          <GoBack>   
-            <GoBackBtn
-              as={Link}
-              exact
-              to='/'
-            >
-              Go Back
-            </GoBackBtn>
+        {isGoBackBox && (
+          <GoBack
+            as={Link}
+            exact="true"
+            to={`/palette/${paletteId}`}
+          >   
+            <button className="copy-button">Go Back</button>
           </GoBack>
         )}
 

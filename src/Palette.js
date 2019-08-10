@@ -71,6 +71,7 @@ class Palette extends Component {
           closeSnackbar={this.closeSnackbar}
           colorFormat={this.state.format}
           open={this.state.snackbarOpen}
+          showSlider
         />
         <div className="Palette-colors">
           {ColorBoxes}
@@ -80,7 +81,7 @@ class Palette extends Component {
         <Footer
           paletteName={paletteName}
           emoji={emoji}
-          />
+        />
       </div>
     )
   }
