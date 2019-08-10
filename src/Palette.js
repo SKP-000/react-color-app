@@ -56,6 +56,8 @@ class Palette extends Component {
         key={colorDetails.id}
         id={colorDetails.id}
         paletteId={paletteId}
+        showLink
+        canCopy
       />
     ));
 
