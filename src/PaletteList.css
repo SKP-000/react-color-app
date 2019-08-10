@@ -1,16 +1,7 @@
-.PaletteList {
-   display: flex;
-   flex-direction: column;
-   width: 100vw;
-   text-align: center;
-}
+
 
 .PaletteList-title {
   margin-bottom: 2rem;
 }
 
 /* changes the default styling from Link component to something more pleasing */
-.PaletteLink{
-  text-decoration: none;
-  color: inherit;
-}
