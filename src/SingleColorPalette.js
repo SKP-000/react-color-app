@@ -55,7 +55,7 @@ class SingleColorPalette extends Component {
     const colorBoxes = this._shades.map(color => (
       <ColorBox
         name={color.name} 
-        key={color.id}
+        key={color.name}
         background={color[format]}
         height={'50%'}
         showLink={false}

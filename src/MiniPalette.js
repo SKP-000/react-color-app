@@ -50,7 +50,7 @@ const Title = styled.h5`
 
   /* Styling for Emoji */
   span {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
   }
 
 `;

@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import './PaletteList.css';
 
-// TODO: Complete this Component I guess
-// FIXME: Nothing to fix (at least not yet). yay!
-
 const Root = styled.div`
   background-color: blue;
   height: 100vh;
@@ -64,8 +61,13 @@ class PaletteList extends Component {
         <Container>
           
           <Nav>
-            <h1 className="title">React Colors App</h1>
-            <Link exact to='/'>Create Palette</Link>
+            <h1 className='title'>React Colors App</h1>
+            <Link
+              exact='true'
+              to='/'
+            >
+              Create Palette
+            </Link>
           </Nav>
 
           <Palettes>
