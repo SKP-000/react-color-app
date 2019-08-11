@@ -1,5 +1,5 @@
 import chroma from 'chroma-js';
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 
 // EXPORTS:
 // CopyButton
@@ -181,14 +181,26 @@ export const SeeMore = styled.span`
 
 export const CopyOverlay = styled.div`
   position: absolute;
-  opacity: ${props => props.copied ? '1' : '0'};
-  visibility: ${props => props.copied ? 'visible' : 'hidden'};
-  z-index: ${props => props.copied ? '10' : '0'};
+  
+  ${props => props.copied ?
+  css`
+    opacity: 1;
+    visibility: visible;
+    z-index: 10;
+    transform: scale(50);
+  ` :
+  css`
+    opacity: 0;
+    visibility: hidden;
+    z-index: 0;
+    transform: scale(.1);
+  `
+  };
+
   background: ${props => props.color};
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  transform: ${props => props.copied ? 'scale(50)' : 'scale(.1)'};
   transition: transform 1.5s;
 `;
 
@@ -205,11 +217,22 @@ export const CopyMsg = styled.div`
   justify-content: center;
   flex-direction: column;
   z-index: 100;
-  display: ${props => props.copied ? 'auto' : 'none'};
-  visibility: ${props => props.copied ? 'visible' : 'hidden'};
+
+  ${props => props.copied ?
+  css`
+    display: auto;
+    visiblity: visible;
+    animation-play-state: running;
+  ` :
+  css`
+    display: none;
+    visibility: hidden;
+    animation-play-state: paused;
+  `
+  };
+
   transform: scale(0);
   animation: ${popout} 1.4s cubic-bezier(0,1,0,1);
-  animation-play-state: ${props => props.copied ? 'running' : 'paused'};
   animation-delay: .1s;
 
   h1 {
