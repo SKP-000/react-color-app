@@ -59,7 +59,7 @@ const MiniColor = styled.div`
   width: 20%;
   height: 25%;
   display: inline-block;
-  margin: 0 auto;
+  margin: 0;
   position: relative;
   margin-bottom: -3.5px;
 `;
@@ -73,9 +73,7 @@ class MiniPalette extends Component {
   render() {
     const { paletteName: name, emoji, colors } = this.props;
     const miniColorBoxes = colors.map(color => (
-      <MiniColor style={{ background: color.color }} key={color.name}>
-        
-      </MiniColor>
+      <MiniColor style={{ background: color.color }} key={color.name} />
     ))
 
     return (

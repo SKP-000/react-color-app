@@ -3,22 +3,21 @@
   display: flex;
   align-items: center;
   height: 8vh;
-  border-bottom: 2px solid #d8d8d8;
 }
 
 .logo {
- display: inline-block;
- background-color: #eceff1;
- font-size: 22px;
- margin-right: auto;
- padding: 0 13px;
- font-family: Roboto;
- align-self: stretch;
+  display: inline-block;
+  background-color: #eceff1;
+  font-size: 22px;
+  margin-right: auto;
+  padding: 0 13px;
+  font-family: Roboto;
+  align-self: stretch;
 
- display: flex;
- align-items: center;
- text-decoration: none;
- color: black;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black;
 }
 
 .logo-link:active, .logo-link:focus, .logo-link:link {

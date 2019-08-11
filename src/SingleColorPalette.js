@@ -14,7 +14,7 @@ class SingleColorPalette extends Component {
     }
   }
 
-  // loops through the levels, returning the hex value when we find the color we want to display
+  // loops through the levels, returning a shades array
   getShades = (palette, colorToFilterBy) => {
     let shades = [];
     let allColors = palette.colors;

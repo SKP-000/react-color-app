@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Link } from 'react-router-dom';
+import chroma from 'chroma-js';
 import styled from 'styled-components';
 import './ColorBox.css';
 
@@ -34,17 +35,23 @@ const GoBack = styled.div`
   color: inherit;
 
   &:hover .copy-button {
-    color: #ccc;
+    color: #fff;
+    transform: translateY(-3px) scale(1.01);
   }
 
-  .copy-button {
+  &:active .copy-button {
+    color: #ccc;
+    transform: translateY(-1px) scale(1);
+  }
+
+  .copy-button, .copy-button:active {
     border: 0;
     outline: 0;
     opacity: 1;
-    color: white;
+    color: #ccc;
     background-color: rgba(255, 255, 255, .1);
     border: 2px solid rgba(229, 241, 241, .15);
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     padding: .5rem 1.5rem;
     border-radius: 10px;
     text-transform: uppercase;
@@ -76,6 +83,7 @@ export default class ColorBox extends Component {
   render() {
     const { background, name, paletteId, id, showLink, height, canCopy, isGoBackBox } = this.props;
     const { copied } = this.state;
+    const isLightColor = chroma.contrast(background, "black") > 6;
     return (
         
       <Root
@@ -103,7 +111,7 @@ export default class ColorBox extends Component {
         )}
 
         <div className="box-content">
-            <span>{name}</span>
+          <span className={isLightColor && 'darkText'}>{name}</span>
         </div>
         
         {canCopy && (
@@ -124,7 +132,7 @@ export default class ColorBox extends Component {
             to={`/palette/${paletteId}/${id}`}
             onClick={this.stopCopy}
           >
-            <span className="see-more">More</span>
+            <span className={`see-more ${isLightColor && 'darkText'}`}>More</span>
           </Link>
         )}
 
