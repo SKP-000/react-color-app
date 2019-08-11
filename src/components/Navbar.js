@@ -7,7 +7,9 @@ import Snackbar from '@material-ui/core/Snackbar';
 import CloseIcon from '@material-ui/icons/Close';
 import { IconButton } from '@material-ui/core';
 import 'rc-slider/assets/index.css';
-import './Navbar.css';
+import '../Navbar.css';
+
+// TODO: Refactor all styles in Navbar.css into styled components
 
 export default class Navbar extends Component {
 

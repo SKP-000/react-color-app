@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import ColorBox from './ColorBox';
+import {
+  Root,
+  PaletteColors
+} from '../styles/PaletteStyles';
 
 class SingleColorPalette extends Component {
   constructor(props) {
@@ -64,7 +68,7 @@ class SingleColorPalette extends Component {
     ));
 
     return (
-      <div className="Palette">
+      <Root>
         <Navbar 
           colorFormat={this.state.format}
           handleChange={this.changeFormat}
@@ -72,22 +76,21 @@ class SingleColorPalette extends Component {
           open={this.state.snackbarOpen}
           showSlider={false}
         />
-        <div className="Palette-colors">
+        <PaletteColors>
           {colorBoxes}
           <ColorBox
-            id='react-logo'
             background={'#000'}
             height={'50%'}
             paletteId={palette.id}
             isGoBackBox
           />
-        </div>
+        </PaletteColors>
 
         <Footer 
           paletteName={paletteName}
           emoji={emoji}
         />
-      </div>
+      </Root>
     )
   }
 }

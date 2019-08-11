@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import ColorBox from './ColorBox';
 import Navbar from './Navbar';
 import Footer from './Footer';
-import './Palette.css';
+import {
+  Root,
+  PaletteColors
+} from '../styles/PaletteStyles';
+
 
 class Palette extends Component {
 
@@ -62,8 +66,7 @@ class Palette extends Component {
     ));
 
     return (
-      <div className="Palette">
-        {/* Navbar here. TODO */}
+      <Root>
         <Navbar
           level={level}
           changeLevel={this.changeLevel}
@@ -73,16 +76,14 @@ class Palette extends Component {
           open={this.state.snackbarOpen}
           showSlider
         />
-        <div className="Palette-colors">
+        <PaletteColors>
           {ColorBoxes}
-          {/* a bunch of color boxes here. TODO */}
-        </div>
-        {/* Footer here... eventually. TODO */}
+        </PaletteColors>
         <Footer
           paletteName={paletteName}
           emoji={emoji}
         />
-      </div>
+      </Root>
     )
   }
 }

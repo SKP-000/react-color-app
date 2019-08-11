@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import PaletteList from './PaletteList';
 import Palette from './Palette';
-import seedColors from './seedColors';
+import seedColors from '../seedColors';
 import SingleColorPalette from './SingleColorPalette';
-import { generatePalette } from './colorHelper';
+import { generatePalette } from '../colorHelper';
 
 class App extends Component {
   // a simple function which returns the palette whose id matches that of the route
@@ -14,10 +14,9 @@ class App extends Component {
     }
   }
 
-
   render() {
     return (
-      <div className="App">
+      <div>
         <Switch>
           <Route exact
             path="/"

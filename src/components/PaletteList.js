@@ -1,52 +1,14 @@
 import React, { Component } from 'react';
 import MiniPalette from './MiniPalette';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import './PaletteList.css';
+import {
+  Root,
+  Container,
+  Nav,
+  Palettes
+} from '../styles/PaletteListStyles';
 
-const Root = styled.div`
-  background-color: blue;
-  height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-`;
 
-const Container = styled.div`
-  width: 50%;
-  padding: .5rem;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-  flex-wrap: wrap;
-`;
-
-const Nav = styled.nav`
-  display: flex;
-  color: white;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-
-  a {
-    text-decoration: none;
-    color: inherit;
-
-    &:hover {
-      text-decoration: underline;
-    }
-    
-  }
-`;
-
-const Palettes = styled.div`
-  box-sizing: border-box;
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(3, 30%);
-  grid-gap: 5%;
-`;
 
 class PaletteList extends Component {
 
@@ -61,7 +23,7 @@ class PaletteList extends Component {
         <Container>
           
           <Nav>
-            <h1 className='title'>React Colors App</h1>
+            <h1>React Colors App</h1>
             <Link
               exact='true'
               to='/'
