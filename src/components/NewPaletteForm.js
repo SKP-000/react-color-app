@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import chroma from 'chroma-js';
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { ChromePicker } from 'react-color';
 
 // TODO: REFACTOR THIS COMPONENT TO USE STYLED-COMPONENTS INSTEAD OF MATERIAL-UI's IN-HOUSE STYLING SOLUTION
@@ -89,7 +90,23 @@ class NewPaletteForm extends Component {
   state = {
     open: false,
     currentColor: '#202020',
+    newName: '',
     colors: []
+  }
+
+  componentDidMount() {
+      // custom rule will have name 'isColorNameUnique'
+    ValidatorForm.addValidationRule('isColorNameUnique', value =>
+      this.state.colors.every(
+        ({ name }) => name.toLowerCase() !== value.toLowerCase()
+      )
+    );
+    
+    ValidatorForm.addValidationRule('isColorUnique', value => 
+      this.state.colors.every(
+        ({ color }) => color !== this.state.currentColor
+      )
+    );
   }
 
   handleDrawerOpen = () => {
@@ -100,19 +117,24 @@ class NewPaletteForm extends Component {
     this.setState({ open: false });
   }
 
+  handleChange = evt => {
+    this.setState({ newName: evt.target.value });
+  }
+
   updateNewColor = (newColor) => {
     this.setState({ currentColor: newColor.hex });
   }
 
   addNewColor = () => {
+    const newColor = { color: this.state.currentColor, name: this.state.newName };
     this.setState(st => (
-      {colors: [...st.colors, this.state.currentColor]}
-    ))
+      { colors: [...st.colors, newColor], newName: '' }
+    ));
   }
 
   render() {
     const { classes } = this.props;
-    const { open, currentColor, colors } = this.state;
+    const { open, currentColor, colors, newName } = this.state;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -178,19 +200,28 @@ class NewPaletteForm extends Component {
             color={currentColor}
             onChangeComplete={this.updateNewColor}
           />
-          <Button
-            variant='contained'
-            color='primary'
-            onClick={this.addNewColor}
-            disabled={colors.length > 19 ? true : false}
-            style={{
-              backgroundColor: currentColor,
-              // Checks if the contrast between the background color and the text color is low, if it is then set text color to a color that would give a better contrast ratio and thus improve readability
-              color: chroma.contrast(currentColor, "black") > 6 ? '#000' : '#fff'
-            }}
-          >
-            Add Color
-          </Button>
+          <ValidatorForm onSubmit={this.addNewColor} instantValidate={false} >
+            <TextValidator
+              value={newName}
+              onChange={this.handleChange}
+              validators={['required', 'isColorNameUnique', 'isColorUnique']}
+              errorMessages={['name must not be empty', 'name already in use', 'color already in use']}
+            />
+            <Button
+              variant='contained'
+              color='primary'
+              type='submit'
+              disabled={colors.length > 19 ? true : false}
+              style={{
+                backgroundColor: currentColor,
+                // Checks if the contrast between the background color and the text color is low, if it is then set text color to a color that would give a better contrast ratio and thus improve readability
+                color: chroma.contrast(currentColor, "black") > 6 ? '#000' : '#fff'
+              }}
+            >
+              Add Color
+            </Button>
+          </ValidatorForm>
+          
         </Drawer>
         <main
           className={clsx(classes.content, {
@@ -199,7 +230,7 @@ class NewPaletteForm extends Component {
         >
           <div className={classes.drawerHeader} />
           {this.state.colors.map(color => (
-            <DraggableColorBox color={color} />
+            <DraggableColorBox color={color.color} name={color.name} />
           ))}
         </main>
       </div>

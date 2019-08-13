@@ -62,7 +62,7 @@ export const CopyButton = styled.button`
   font-family: inherit;
   cursor: pointer;
   text-transform: inherit;
-  box-shadow: 0rem .5rem 5rem rgba(0, 0, 0, .1);
+  box-shadow: 3px 2px 6px rgba(0, 0, 0, .1);
 
   color: #fff;
   text-shadow: 1px 1px black;
@@ -158,6 +158,7 @@ export const BoxContent = styled.div`
   span {
     color: ${props => chroma.contrast(props.background, "black") > 6 ? '#000' : 'inherit'}
   }
+  
 `;
 
 export const SeeMore = styled.span`

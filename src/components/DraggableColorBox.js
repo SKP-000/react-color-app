@@ -8,7 +8,7 @@ export default function DraggableColorBox(props) {
     <Root
       background={props.color}
     >
-      {props.color}
+      {props.name}
     </Root>
   )
 }
