@@ -90,6 +90,7 @@ class SingleColorPalette extends Component {
           paletteName={paletteName}
           emoji={emoji}
         />
+        
       </Root>
     )
   }

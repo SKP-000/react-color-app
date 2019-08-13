@@ -26,7 +26,7 @@ class PaletteList extends Component {
             <h1>React Colors App</h1>
             <Link
               exact='true'
-              to='/'
+              to='/palette/new'
             >
               Create Palette
             </Link>

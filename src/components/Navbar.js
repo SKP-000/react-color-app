@@ -11,8 +11,10 @@ import {
   Root,
   Logo,
   LogoLink,
+  SliderContainer,
+  SelectorContainer,
+  SnackbarContainer,
 } from '../styles/NavbarStyles';
-import '../Navbar.css';
 
 // TODO: Refactor all styles in Navbar.css into styled components
 
@@ -33,8 +35,8 @@ export default class Navbar extends Component {
         </Logo>
 
         {showSlider && (
-          <div className="slider">
-            <h1 className="slider-level">Level: {level}</h1>
+          <SliderContainer>
+            <h1>Level: {level}</h1>
 
             <Slider
               min={100}
@@ -42,25 +44,16 @@ export default class Navbar extends Component {
               step={100}
               defaultValue={level}
               onAfterChange={changeLevel}
-
-              trackStyle={{
-                backgroundColor: 'transparent'
-              }}
-
-              railStyle={{
-                height: '8px'
-              }}
-
               />
-          </div>
+          </SliderContainer>
         )}
 
-        <div className="Navbar-selector">
+        <SelectorContainer>
             <Select 
               value={this.props.colorFormat}
               onChange={this.props.handleChange}
               name='color-format'
-              className='format-selector'
+              className="select"
             >
             
             <MenuItem value='hex'>HEX - #AB7C90</MenuItem>
@@ -68,30 +61,33 @@ export default class Navbar extends Component {
             <MenuItem value='rgba'>RGBA - rgba(237, 222, 140, 0.8)</MenuItem> 
 
             </Select>
-        </div>
+        </SelectorContainer>
 
-        <Snackbar
-          className='snackbar'
-          anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
-          open={this.props.open}
-          autoHideDuration={3000} // 3000 ms
-          message={
-            <span id='message-id' className='snackbar-message'>
-              Format Changed to: <span className='snackbar-colortext'>{this.props.colorFormat}</span>
-            </span>
-          }
-          ContentProps={{
-            "aria-describedby": "message-id"
-          }}
-          onClose={this.props.closeSnackbar}
-          action={
-            [
-              <IconButton onClick={this.props.closeSnackbar}>
-                <CloseIcon className='snackbar-close' />
-              </IconButton>
-            ]
-          }
+        <SnackbarContainer Snackbar={Snackbar} CloseIcon={CloseIcon}>
+          <Snackbar
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+            open={this.props.open}
+            autoHideDuration={3000} // 3000 ms
+            className="snackbar"
+            message={
+              <span id="message-id" className="message">
+                Format Changed to: <span className="colortext">{this.props.colorFormat}</span>
+              </span>
+            }
+            ContentProps={{
+              "aria-describedby": "message-id"
+            }}
+            onClose={this.props.closeSnackbar}
+            action={
+              [
+                <IconButton onClick={this.props.closeSnackbar}>
+                  <CloseIcon className='close' />
+                </IconButton>
+              ]
+            }
         />
+        </SnackbarContainer>
+        
 
       </Root>
     )
