@@ -1,11 +1,14 @@
 import styled from 'styled-components';
 
 export const Root = styled.div`
-background-color: blue;
-height: 100vh;
-display: flex;
-align-items: flex-start;
-justify-content: center;
+  background-size: cover;
+  height: 100vh;
+  background-color: blue;
+  background-size: 'cover';
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: visible;
 `;
 
 export const Container = styled.div`

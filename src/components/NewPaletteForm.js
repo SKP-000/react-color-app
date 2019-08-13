@@ -18,7 +18,7 @@ import { ChromePicker } from 'react-color';
 
 // TODO: REFACTOR THIS COMPONENT TO USE STYLED-COMPONENTS INSTEAD OF MATERIAL-UI's IN-HOUSE STYLING SOLUTION
 
-const drawerWidth = 340;
+const drawerWidth = 400;
 
 const styles = (theme => ({
   root: {
@@ -38,17 +38,31 @@ const styles = (theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  title: {
+    textTransform: 'uppercase',
+    fontSize: '1.6rem',
+    fontWeight: 300,
+    fontFamily: '"Montserrat", serif',
+    marginBottom: '1.5rem',
+    borderBottom: '1px solid #000'
+  },
   menuButton: {
     marginRight: theme.spacing(2),
   },
   subButtonContainer: {
     display: 'flex',
-    justifyContent: 'space-around'
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   subButton: {
     color: '#202020',
     border: '1.5px solid #000',
-    fontWeight: '700'
+    fontWeight: '700',
+    margin: '10px'
+  },
+  saveButton: {
+    border: '1.5px solid #fff',
+    color: '#fff'
   },
   hide: {
     display: 'none',
@@ -66,6 +80,13 @@ const styles = (theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
     justifyContent: 'flex-end',
+  },
+  drawerContent: {
+    display: 'flex',
+    marginTop: '1rem',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
   content: {
     flexGrow: 1,
@@ -132,6 +153,17 @@ class NewPaletteForm extends Component {
     ));
   }
 
+  savePalette = () => {
+    let newName = 'New Test Palette';
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, '-'),
+      colors: this.state.colors
+    }
+    this.props.savePalette(newPalette);
+    this.props.history.push('/');
+  }
+
   render() {
     const { classes } = this.props;
     const { open, currentColor, colors, newName } = this.state;
@@ -140,6 +172,7 @@ class NewPaletteForm extends Component {
         <CssBaseline />
         <AppBar
           position="fixed"
+          color='default'
           className={clsx(classes.appBar, {
             [classes.appBarShift]: open,
           })}
@@ -157,6 +190,14 @@ class NewPaletteForm extends Component {
             <Typography variant="h6" noWrap>
               Create Palette
             </Typography>
+            <Button
+              variant='contained'
+              color='primary'
+              onClick={this.savePalette}
+              style={{backgroundColor: '#202020'}}
+            >
+              Save Palette
+            </Button>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -175,52 +216,57 @@ class NewPaletteForm extends Component {
           </div>
 
           <Divider />
-          <Typography variant='h4'>
-            Design Your Palette
+
+          <div className={classes.drawerContent}>
+            <Typography variant='h4' className={classes.title}>
+              Design Your Palette
             </Typography>
-          
-          <div className={classes.subButtonContainer}>
-            <Button
-              variant='outlined'
-              color='inherit'
-              className={classes.subButton}
-            >
-              Clear Palette
-            </Button>
-            <Button
-              variant='outlined'
-              color='inherit'
-              className={classes.subButton}
-            >
-              Random Color
-            </Button>
+
+            <ChromePicker 
+              color={currentColor}
+              onChangeComplete={this.updateNewColor}
+            />
+            <ValidatorForm onSubmit={this.addNewColor} instantValidate={false} >
+              <TextValidator
+                value={newName}
+                onChange={this.handleChange}
+                validators={['required', 'isColorNameUnique', 'isColorUnique']}
+                errorMessages={['name must not be empty', 'name already in use', 'color already in use']}
+              />
+              <Button
+                variant='contained'
+                color='primary'
+                type='submit'
+                disabled={colors.length > 19 ? true : false}
+                style={{
+                  backgroundColor: currentColor,
+                  // Checks if the contrast between the background color and the text color is low, if it is then set text color to a color that would give a better contrast ratio and thus improve readability
+                  color: chroma.contrast(currentColor, "black") > 6 ? '#000' : '#fff'
+                }}
+              >
+                Add Color
+              </Button>
+            </ValidatorForm>
+
+            <div className={classes.subButtonContainer}>
+              <Button
+                variant='outlined'
+                color='inherit'
+                className={classes.subButton}
+              >
+                Clear Palette
+              </Button>
+              <Button
+                variant='outlined'
+                color='inherit'
+                className={classes.subButton}
+              >
+                Random Color
+              </Button>
+            </div>
+
           </div>
           
-          <ChromePicker 
-            color={currentColor}
-            onChangeComplete={this.updateNewColor}
-          />
-          <ValidatorForm onSubmit={this.addNewColor} instantValidate={false} >
-            <TextValidator
-              value={newName}
-              onChange={this.handleChange}
-              validators={['required', 'isColorNameUnique', 'isColorUnique']}
-              errorMessages={['name must not be empty', 'name already in use', 'color already in use']}
-            />
-            <Button
-              variant='contained'
-              color='primary'
-              type='submit'
-              disabled={colors.length > 19 ? true : false}
-              style={{
-                backgroundColor: currentColor,
-                // Checks if the contrast between the background color and the text color is low, if it is then set text color to a color that would give a better contrast ratio and thus improve readability
-                color: chroma.contrast(currentColor, "black") > 6 ? '#000' : '#fff'
-              }}
-            >
-              Add Color
-            </Button>
-          </ValidatorForm>
           
         </Drawer>
         <main
