@@ -1,22 +1,15 @@
 import React, { Component } from 'react';
 import PaletteFormNav from './PaletteFormNav';
+import ColorPickerForm from './ColorPickerForm';
 import DraggableColorList from './DraggableColorList';
-import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
-import chroma from 'chroma-js';
-import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
-import { ChromePicker } from 'react-color';
 
 // TODO: REFACTOR THIS COMPONENT TO USE STYLED-COMPONENTS INSTEAD OF MATERIAL-UI's IN-HOUSE STYLING SOLUTION
 
@@ -112,31 +105,7 @@ const styles = (theme => ({
 class NewPaletteForm extends Component {
   state = {
     open: false,
-    currentColor: '#202020',
-    newColorName: '',
     colors: this.props.palettes[0].colors,
-  }
-
-  componentDidMount() {
-      // custom rule will have name 'colorNameUnique'
-    ValidatorForm.addValidationRule('colorNameUnique', value =>
-      this.state.colors.every(
-        ({ name }) => name.toLowerCase() !== value.toLowerCase()
-      )
-    );
-    
-    ValidatorForm.addValidationRule('colorUnique', value => 
-      this.state.colors.every(
-        ({ color }) => color !== this.state.currentColor
-      )
-    );
-
-    ValidatorForm.addValidationRule('charLimit', value =>
-      // if false: display error message
-      // if true: let user submit
-      value.length > 27 ? false : true
-    );
-
   }
 
   /**
@@ -194,14 +163,10 @@ class NewPaletteForm extends Component {
     history.push('/');
   }
 
-  updateNewColor = (newColor) => {
-    this.setState({ currentColor: newColor.hex });
-  }
-
-  addNewColor = () => {
-    let newColor = { color: this.state.currentColor, name: this.state.newColorName };
+  addNewColor = (currentColor, newColorName) => {
+    let newColor = { color: currentColor, name: newColorName };
     this.setState(st => (
-      { colors: [...st.colors, newColor], newColorName: '' }
+      { colors: [...st.colors, newColor] }
     ));
   }
 
@@ -216,10 +181,10 @@ class NewPaletteForm extends Component {
 
     // gets a random index for both the palette and it's respective colors array
     const randPaletteI = Math.floor(Math.random() * palettes.length);
-    const randColorI = Math.floor(Math.random() * palettes[randPaletteI].colors.length);
-    
-    // gets the random color of the randomly chosen palette
-    let randomColor = palettes[randPaletteI].colors[randColorI];
+    const randomPalette = palettes[randPaletteI];
+    const getColorI = () => (Math.floor(Math.random() * palettes[randPaletteI].colors.length));
+    let randomColor = randomPalette.colors[getColorI()];
+    // gets the random color of the randomly chosen palette    
 
     this.setState(st => ({
       colors: [...st.colors, randomColor]
@@ -234,9 +199,7 @@ class NewPaletteForm extends Component {
     const { classes, palettes } = this.props;
     const {
       open,
-      currentColor,
-      colors,
-      newColorName
+      colors
     } = this.state;
     // colors cannot be added to palette if number of colors exceeds 20
     // used for setting disabled attr in buttons Add Color and Random Color
@@ -272,44 +235,11 @@ class NewPaletteForm extends Component {
             <Typography variant='h4' className={classes.title}>
               Design Your Palette
             </Typography>
-
-            <ChromePicker 
-              color={currentColor}
-              onChangeComplete={this.updateNewColor}
+            <ColorPickerForm 
+              paletteFull={paletteFull}
+              colors={colors}
+              addNewColor={this.addNewColor}
             />
-            <ValidatorForm onSubmit={this.addNewColor} instantValidate={false} >
-              <TextValidator
-                value={newColorName}
-                name='newColorName'
-                onChange={this.handleChange}
-                validators={[
-                  'required',
-                  'colorNameUnique',
-                  'colorUnique',
-                  'charLimit'
-                ]}
-                errorMessages={[
-                  'Name must not be empty',
-                  'Name already in use',
-                  'Color already in use',
-                  'Name is too long (above 27 characters)'
-                ]}
-              />
-              <Button
-                variant='contained'
-                color='primary'
-                type='submit'
-                disabled={paletteFull}
-                style={{
-                  backgroundColor: currentColor,
-                  // Checks if the contrast between the background color and the text color is low, if it is then set text color to a color that would give a better contrast ratio and thus improve readability
-                  color: chroma.contrast(currentColor, "black") > 6 ? '#000' : '#fff'
-                }}
-              >
-                Add Color
-              </Button>
-            </ValidatorForm>
-
             <div className={classes.subButtonContainer}>
               <Button
                 className={classes.subButton}
