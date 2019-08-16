@@ -12,9 +12,8 @@ export const Root = styled.div`
 export const PaletteColors = styled.div`
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start;
-  justify-content: flex-start;
-  height: fit-content;
+  flex-direction: row;
+  align-content: flex-start;
 
   height: 85%; /* Translates to 85vh */
 `;

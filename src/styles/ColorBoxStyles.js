@@ -11,7 +11,7 @@ import styled, { keyframes, css } from 'styled-components';
 // CopyOverlay
 // CopyMsg
 
-const bobright = keyframes`
+export const bobright = keyframes`
   0% {
   }
 
@@ -149,8 +149,8 @@ export const BoxContent = styled.div`
   bottom: 0;
   left: 0;
   color: #f0ffff;
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 15px;
   width: 69%;
 
   transform: translateX(5px) translateY(-5px);

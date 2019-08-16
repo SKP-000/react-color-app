@@ -22,8 +22,7 @@ export default [
       { name: "deep orange", color: "#FF5722" },
       { name: "brown", color: "#795548" },
       { name: "grey", color: "#9E9E9E" },
-      { name: "blue grey", color: "#607D8B" },
-      { name: "consistency", color: "#ffdfec" }
+      { name: "blue grey", color: "#607D8B" }
     ]
   },
   {

@@ -2,10 +2,12 @@ import styled, { keyframes } from 'styled-components';
 
 const fadeIn = keyframes`
   0% {
+    opacity: 0;
     transform: translateX(-10%) translateY(125%);
   }
 
   100% {
+    opacity: 1;
     transform: translateX(-10%) translateY(0%);
   }
 `;
@@ -95,11 +97,11 @@ export const SelectorContainer = styled.div`
 `;
 
 export const SnackbarContainer = styled.div`
+  position: absolute;
+  bottom: 3.5%;
+  right: 2.5%;
 
   .snackbar {
-    position: absolute;
-    bottom: 3.5%;
-    right: 2.5%;
     transform: translateX(-10%) translateY(0%);
     animation: ${fadeIn} .7s;
 
