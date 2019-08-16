@@ -19,20 +19,6 @@ const styles = (theme => ({
   root: {
     display: 'flex',
   },
-  appBar: {
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
   title: {
     textTransform: 'uppercase',
     fontSize: '1.6rem',
@@ -40,9 +26,6 @@ const styles = (theme => ({
     fontFamily: '"Montserrat", serif',
     marginBottom: '1.5rem',
     borderBottom: '1px solid #000'
-  },
-  menuButton: {
-    marginRight: theme.spacing(2),
   },
   subButtonContainer: {
     display: 'flex',
@@ -58,9 +41,6 @@ const styles = (theme => ({
   saveButton: {
     border: '1.5px solid #fff',
     color: '#fff'
-  },
-  hide: {
-    display: 'none',
   },
   drawer: {
     width: drawerWidth,
