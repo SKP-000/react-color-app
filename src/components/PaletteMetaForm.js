@@ -11,7 +11,9 @@ import { Picker } from 'emoji-mart';
 
 export default class PaletteMetaForm extends Component {
   state = {
-    newPaletteName: ''
+    stage: 'name',
+    newPaletteName: '',
+    paletteName: ''
   }
 
   componentDidMount() {
@@ -34,14 +36,55 @@ export default class PaletteMetaForm extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
+  handleSavePalette = (paletteName, emoji) => {
+    const { savePalette, history, colors } = this.props;
+    const newPalette = {
+      paletteName: paletteName,
+      id: paletteName.toLowerCase().replace(/ g/, '-'),
+      emoji: `${ emoji.native ? emoji.native : emoji.colons }`,
+      colors
+    }
+
+    savePalette(newPalette);
+    history.push('/');
+
+    /*const { savePalette, history, colors } = this.props;
+    const newPalette = {
+      paletteName: newPaletteName,
+      id: newPaletteName.toLowerCase().replace(/ /g, '-'),
+      colors
+    }
+    savePalette(newPalette);
+    history.push('/');*/
+  }
+
+  handleSave = (emoji) => {
+    const { paletteName } = this.state;
+    this.handleSavePalette(paletteName, emoji);
+  }
+
+  setNextStage = () => {
+    this.setState(st => (
+      {paletteName: st.newPaletteName}
+    ), () => {
+      this.setState({ stage: 'emoji' })
+    });
+  }
+
   render() {
-    const { classes, handleSubmit, handleShowForm } = this.props;
-    const { newPaletteName } = this.state;
+    const { classes, handleShowForm } = this.props;
+    const { newPaletteName, stage } = this.state;
     return (
-      <Dialog open onClose={handleShowForm} aria-labelledby="form-dialog-title">
+      <div>
+        <Dialog open={stage === 'emoji'} onClose={handleShowForm} >
+          <DialogTitle id="form-dialog-title">Choose a Palette Emoji</DialogTitle>
+          <Picker title='Pick a Palette Emoji' onSelect={this.handleSave} />
+        </Dialog>
+
+        <Dialog open={stage === 'name'} onClose={handleShowForm} aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
           <ValidatorForm
-            onSubmit={() => handleSubmit(newPaletteName)}
+            onSubmit={this.setNextStage}
             instantValidate={false}
             className={classes.paletteForm}
           >
@@ -49,8 +92,6 @@ export default class PaletteMetaForm extends Component {
               <DialogContentText>
                 Please enter a name for your <span role='img' aria-labelledby='sparkles'>✨</span>fabulous palette<span role='img' aria-labelledby='sparkles'>✨</span>
               </DialogContentText>
-              <Picker />
-            
               <TextValidator
                 className={classes.paletteInput}
                 name='newPaletteName'
@@ -70,7 +111,6 @@ export default class PaletteMetaForm extends Component {
                   'Palette name over 25 characters'
                 ]}
               />
-
             </DialogContent>
             <DialogActions style={{ marginBottom: '1em' }}>
               <Button
@@ -81,13 +121,14 @@ export default class PaletteMetaForm extends Component {
               >
                 Save Palette
               </Button>
-              <Button className={classes.subButton} onClick={handleShowForm} variant='outlined' color="inherit">
+              <Button className={classes.subButton} onClick={handleShowForm} variant='outlined'color="inherit">
                 Cancel
               </Button>
             </DialogActions>
-            
           </ValidatorForm>
         </Dialog>
+      </div>
+      
     );
   }
 }

@@ -55,8 +55,6 @@ export const SliderContainer = styled.div`
     white-space: nowrap;
     margin-right: 2rem;
     display: inline-block;
-
-    color: black;
     text-transform: uppercase;
     font-weight: 300;
   }

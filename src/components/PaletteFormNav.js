@@ -80,7 +80,9 @@ class PaletteFormNav extends Component {
       classes,
       open,
       handleDrawerOpen,
-      handleSubmit,
+      savePalette,
+      history,
+      colors,
       palettes
     } = this.props;
     const { formShowing } = this.state;
@@ -134,10 +136,12 @@ class PaletteFormNav extends Component {
         {formShowing && (
           <PaletteMetaForm
             classes={classes}
-            handleSubmit={handleSubmit}
             palettes={palettes}
             handleShowForm={this.handleShowForm}
             formShowing={formShowing}
+            savePalette={savePalette}
+            history={history}
+            colors={colors}
           />
         )}
       </div>

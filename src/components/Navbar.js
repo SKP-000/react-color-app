@@ -16,8 +16,6 @@ import {
   SnackbarContainer,
 } from '../styles/NavbarStyles';
 
-// TODO: Refactor all styles in Navbar.css into styled components
-
 export default class Navbar extends Component {
 
   render() {
