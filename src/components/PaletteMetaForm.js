@@ -11,7 +11,11 @@ import { Picker } from 'emoji-mart';
 
 export default class PaletteMetaForm extends Component {
   state = {
-    newPaletteName: ""
+<<<<<<< HEAD
+    newPaletteName: ''
+=======
+    newPaletteName: ''
+>>>>>>> 76b6f4e2457da54451f7fd550205f540368f0fd0
   }
 
   componentDidMount() {
