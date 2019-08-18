@@ -24,8 +24,7 @@ const styles = (theme => ({
     fontSize: '1.6rem',
     fontWeight: 300,
     fontFamily: '"Montserrat", serif',
-    marginBottom: '1.5rem',
-    borderBottom: '1px solid #000'
+    marginRight: '.5em',
   },
   subButtonContainer: {
     display: 'flex',
@@ -36,7 +35,7 @@ const styles = (theme => ({
     color: '#202020',
     border: '1.5px solid #000',
     fontWeight: '700',
-    margin: '10px',
+    margin: '0px 10px',
   },
   saveButton: {
     border: '1.5px solid #fff',
@@ -58,10 +57,12 @@ const styles = (theme => ({
   },
   drawerContent: {
     display: 'flex',
-    marginTop: '1rem',
     justifyContent: 'center',
     alignItems: 'center',
-    flexDirection: 'column'
+    flexDirection: 'column',
+    height: '100%',
+    width: '90%',
+    alignSelf: 'center'
   },
   content: {
     flexGrow: 1,
@@ -189,7 +190,6 @@ class NewPaletteForm extends Component {
       <div className={classes.root}>
         <PaletteFormNav
           open={open}
-          classes={classes}
           palettes={palettes}
           handleDrawerOpen={this.handleDrawerOpen}
           handleSubmit={this.handleSubmit}
@@ -204,6 +204,9 @@ class NewPaletteForm extends Component {
           }}
         >
           <div className={classes.drawerHeader}>
+            <Typography variant='h4' className={classes.title}>
+              Design Your Palette
+            </Typography>
             <IconButton onClick={this.handleDrawerClose}>
               <ChevronLeftIcon />
             </IconButton>
@@ -212,9 +215,6 @@ class NewPaletteForm extends Component {
           <Divider />
 
           <div className={classes.drawerContent}>
-            <Typography variant='h4' className={classes.title}>
-              Design Your Palette
-            </Typography>
             <ColorPickerForm 
               paletteFull={paletteFull}
               colors={colors}

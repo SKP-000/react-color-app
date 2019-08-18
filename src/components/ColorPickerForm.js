@@ -1,10 +1,33 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import chroma from 'chroma-js';
 import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 import { ChromePicker } from 'react-color';
 
-export default class ColorPickerForm extends Component {
+const styles = ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'stretch',
+    width: '90%'
+  },
+  colorPicker: {
+    display: 'block',
+    width:'100% !important',
+    //marginTop: '-2.5em'
+  },
+  formContent: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  submitBtn: {
+    margin: '1em 0',
+    fontSize: '1.2rem'
+  }
+});
+
+class ColorPickerForm extends Component {
 
   state = {
     currentColor: '#202020',
@@ -52,19 +75,23 @@ export default class ColorPickerForm extends Component {
   }
 
   render() {
-    const { paletteFull } = this.props;
+    const { paletteFull, classes } = this.props;
     const { currentColor, newColorName } = this.state;
     
     return (
-      <div>  
+      <div className={classes.root}>  
         <ChromePicker 
           color={currentColor}
           onChangeComplete={this.updateNewColor}
+          className={classes.colorPicker}
         />
-        <ValidatorForm onSubmit={this.handleSubmit} instantValidate={false} >
+        <ValidatorForm className={classes.formContent} onSubmit={this.handleSubmit} instantValidate={false} >
           <TextValidator
             value={newColorName}
             name='newColorName'
+            placeholder='Color Name'
+            variant='filled'
+            margin='normal'
             onChange={this.handleChange}
             validators={[
               'required',
@@ -83,17 +110,20 @@ export default class ColorPickerForm extends Component {
             variant='contained'
             color='primary'
             type='submit'
+            className={classes.submitBtn}
             disabled={paletteFull}
             style={{
               backgroundColor: paletteFull ? 'grey' : currentColor,
-              // Checks if the contrast between the background color and the text color is low, if it is then set text color to a color that would give a better contrast ratio and thus improve readability
+              // Checks if the contrast between the background color and the text color is low, if it isthen set text color to a color that would give a better contrast ratio and thus improvereadability
               color: chroma.contrast(currentColor, 'black') > 6 ? '#000' : '#fff'
             }}
           >
             Add Color
           </Button>
-        </ValidatorForm>
-      </div>
+          </ValidatorForm>
+        </div>
     )
   }
 }
+
+export default withStyles(styles)(ColorPickerForm);
