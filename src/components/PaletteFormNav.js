@@ -51,6 +51,7 @@ const styles = (theme => ({
   },
   paletteForm: {
     display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'space-between'
   },
@@ -64,6 +65,16 @@ const styles = (theme => ({
 
 class PaletteFormNav extends Component {
 
+  state = {
+    formShowing: false
+  }
+
+  handleShowForm = () => {
+    this.setState(st => (
+      {formShowing: !st.formShowing}
+    ));
+  }
+
   render() {
     const {
       classes,
@@ -72,6 +83,7 @@ class PaletteFormNav extends Component {
       handleSubmit,
       palettes
     } = this.props;
+    const { formShowing } = this.state;
 
     return (
       <div className={classes.root}>
@@ -99,12 +111,15 @@ class PaletteFormNav extends Component {
           </Toolbar>
 
           <div className={classes.navBtns}>
-            <PaletteMetaForm
-              classes={classes}
-              handleSubmit={handleSubmit}
-              palettes={palettes}
-            />
-            <Link to='/' style={{textDecoration: 'none'}}>
+            <Button
+              variant="contained"
+              style={{ backgroundColor: '#202020' }}
+              color="primary"
+              onClick={this.handleShowForm}
+            >
+              Submit Palette
+            </Button>
+            <Link to='/' style={{ textDecoration: 'none' }}>
               <Button
                 className={classes.subButton}
                 variant='outlined'
@@ -115,6 +130,16 @@ class PaletteFormNav extends Component {
             </Link>
           </div>
         </AppBar>
+
+        {formShowing && (
+          <PaletteMetaForm
+            classes={classes}
+            handleSubmit={handleSubmit}
+            palettes={palettes}
+            handleShowForm={this.handleShowForm}
+            formShowing={formShowing}
+          />
+        )}
       </div>
     )
   }

@@ -6,11 +6,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import 'emoji-mart/css/emoji-mart.css';
+import { Picker } from 'emoji-mart';
 
 export default class PaletteMetaForm extends Component {
   state = {
-    open: false,
-    newPaletteName: ''
+    newPaletteName: ""
   }
 
   componentDidMount() {
@@ -33,41 +34,31 @@ export default class PaletteMetaForm extends Component {
     this.setState({ [evt.target.name]: evt.target.value });
   }
 
-  handleClickOpen = () => {
-    this.setState({open: true});
-  }
-
-  handleClose = () => {
-    this.setState({open: false});
-  }
-
   render() {
-    const { classes, handleSubmit } = this.props;
-    const { open, newPaletteName } = this.state;
+    const { classes, handleSubmit, handleShowForm } = this.props;
+    const { newPaletteName } = this.state;
     return (
-      <div>
-        <Button variant="outlined" color="primary" onClick={this.handleClickOpen}>
-          Open form dialog
-        </Button>
-        <Dialog open={open} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-          <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              To subscribe to this website, please enter your email address here. We will send updates
-              occasionally.
-            </DialogContentText>
-
-            <ValidatorForm
-              onSubmit={() => handleSubmit(newPaletteName)}
-              instantValidate={false}
-              className={classes.paletteForm}
-            >
+      <Dialog open onClose={handleShowForm} aria-labelledby="form-dialog-title">
+          <DialogTitle id="form-dialog-title">Choose a Palette Name</DialogTitle>
+          <ValidatorForm
+            onSubmit={() => handleSubmit(newPaletteName)}
+            instantValidate={false}
+            className={classes.paletteForm}
+          >
+            <DialogContent>
+              <DialogContentText>
+                Please enter a name for your <span role='img' aria-labelledby='sparkles'>✨</span>fabulous palette<span role='img' aria-labelledby='sparkles'>✨</span>
+              </DialogContentText>
+              <Picker />
+            
               <TextValidator
                 className={classes.paletteInput}
                 name='newPaletteName'
                 label='Palette Name'
                 value={newPaletteName}
                 onChange={this.handleChange}
+                fullWidth
+                margin='normal'
                 validators={[
                   'required',
                   'paletteNameUnique',
@@ -79,6 +70,9 @@ export default class PaletteMetaForm extends Component {
                   'Palette name over 25 characters'
                 ]}
               />
+
+            </DialogContent>
+            <DialogActions style={{ marginBottom: '1em' }}>
               <Button
                 variant='contained'
                 color='primary'
@@ -87,19 +81,13 @@ export default class PaletteMetaForm extends Component {
               >
                 Save Palette
               </Button>
-            </ValidatorForm>
-
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Cancel
+              <Button className={classes.subButton} onClick={handleShowForm} variant='outlined' color="inherit">
+                Cancel
               </Button>
-            <Button onClick={this.handleClose} color="primary">
-              Subscribe
-              </Button>
-          </DialogActions>
+            </DialogActions>
+            
+          </ValidatorForm>
         </Dialog>
-      </div>
     );
   }
 }
