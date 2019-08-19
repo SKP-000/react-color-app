@@ -65,8 +65,9 @@ const styles = (theme => ({
     alignSelf: 'center'
   },
   content: {
-    flexGrow: 1,
+    flex: 1,
     height: 'calc(100vh - 64px)',
+    padding: 0,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
@@ -74,11 +75,12 @@ const styles = (theme => ({
     marginLeft: -drawerWidth,
   },
   contentShift: {
+    padding: 0,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
-    marginLeft: 0,
+    marginLeft: 0
   }
   
 }));
@@ -158,6 +160,14 @@ class NewPaletteForm extends Component {
 
   getRandomColor = () => {
     const { palettes } = this.props;
+
+    // banish this code to hell
+    // const randPaletteI = Math.floor(Math.random() * palettes.length);
+    // const randomPalette = palettes[randPaletteI];
+    // const getColorI = () => (Math.floor(Math.random() * palettes[randPaletteI].colors.length));
+    // let randomColor = randomPalette.colors[getColorI()];
+    // let dupeColors = colors.filter(color => color.includes(randomColor))
+    // if (dupeColors !== []) randomColor = randomPalette.colors[getColorI()];
     
     // an array containing all of the colors (flattened)
     const allColors = palettes.map(p => p.colors).flat();

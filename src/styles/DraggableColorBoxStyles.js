@@ -10,8 +10,7 @@ export const Root = styled.div`
   width: 20%;
   margin: 0;
   margin-top: -.8vh;
-  display: flex;
-  flex-grow: 1;
+  flex: 1;
   position: relative;
   display: inline-block;
   cursor: pointer;
