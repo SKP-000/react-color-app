@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import DeleteIcon from '@material-ui/icons/Delete';
 import {
   Root,
   Colors,
   Title,
-  MiniColor
+  MiniColor,
+  Delete
 } from '../styles/MiniPaletteStyles';
 
 class MiniPalette extends Component {
@@ -20,6 +22,9 @@ class MiniPalette extends Component {
 
     return (
       <Root color="#000" fontColor="#fca" onClick={this.handleClick}>
+        <Delete>
+          <DeleteIcon className='deleteIcon' />
+        </Delete>
         <Colors>
           {miniColorBoxes}
         </Colors>

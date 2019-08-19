@@ -11,9 +11,11 @@ export const Root = styled.div`
   padding: 0.5rem;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
 
-  &:hover {
-    cursor: pointer;
+  &:hover .deleteIcon {
+    opacity: 1;
+    transform: translateX(0);
   }
 
 `;
@@ -49,4 +51,26 @@ export const MiniColor = styled.div`
   margin: 0;
   position: relative;
   margin-bottom: -3.5px;
+`;
+
+export const Delete = styled.div`
+  /*height: 18%;
+  width: 15%;*/
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+
+  .deleteIcon {
+    color: white;
+    background-color: #eb3d30;
+    height: 30px;
+    width: 30px;
+    padding: 5px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: all .3s ease-in-out;
+    border-bottom-left-radius: 5px;
+  }
+
 `;
