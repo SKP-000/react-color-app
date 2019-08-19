@@ -3,6 +3,7 @@ import MiniPalette from './MiniPalette';
 import { Link } from 'react-router-dom';
 import {
   Root,
+  GlobalStyle,
   Container,
   Nav,
   Palettes
@@ -20,6 +21,7 @@ class PaletteList extends Component {
     const { palettes } = this.props;
     return (
       <Root>
+        <GlobalStyle />
         <Container>
           
           <Nav>

@@ -8,22 +8,39 @@ import SingleColorPalette from './SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm';
 
 class App extends Component {
-  // a simple function which returns the palette whose id matches that of the route
-
+  _savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
   state = {
-    palettes: seedColors
+    palettes: this._savedPalettes || seedColors
   }
 
+  // a simple function which returns the palette whose id matches that of the route
   findPalette = (id) => {
     for (let palette of this.state.palettes) {
       if (palette.id === id) return palette;
     }
   }
 
-  savePalette = (newPalette) => {
-    this.setState(st => (
-      {palettes: [...st.palettes, newPalette]}
+  syncLocalStorage = () => {
+    const { palettes } = this.state;
+    // save palettes to localStorage
+    window.localStorage.setItem('palettes', JSON.stringify(palettes));
+  }
+
+  savePalette = async(newPalette) => {
+    // sets state and then syncs the palettes to localStorage
+    await this.promisedSetState(st => (
+      { palettes: [...st.palettes, newPalette] }
     ));
+    this.syncLocalStorage();
+  }
+
+  // returns a Promise version of setState which we can then use the async/await syntax on
+  promisedSetState = (newState) => {
+    return new Promise(resolve => {
+      this.setState(newState, () => {
+        resolve();
+      })
+    })
   }
 
   render() {
