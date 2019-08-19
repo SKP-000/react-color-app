@@ -83,9 +83,8 @@ export default class Navbar extends Component {
                 </IconButton>
               ]
             }
-        />
-        </SnackbarContainer>
-        
+          />
+        </SnackbarContainer>  
 
       </Root>
     )

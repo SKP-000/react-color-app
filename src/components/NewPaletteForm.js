@@ -158,17 +158,17 @@ class NewPaletteForm extends Component {
 
   getRandomColor = () => {
     const { palettes } = this.props;
-
-    // gets a random index for both the palette and it's respective colors array
-    const randPaletteI = Math.floor(Math.random() * palettes.length);
-    const randomPalette = palettes[randPaletteI];
-    const getColorI = () => (Math.floor(Math.random() * palettes[randPaletteI].colors.length));
-    let randomColor = randomPalette.colors[getColorI()];
-    // gets the random color of the randomly chosen palette    
+    
+    // an array containing all of the colors (flattened)
+    const allColors = palettes.map(p => p.colors).flat();
+    // a filtered array containing all of the colors NOT included in the current colors array in state
+    let filteredArr = allColors.filter(color => !this.state.colors.includes(color));
+    const randomColor = filteredArr[Math.floor(Math.random() * filteredArr.length)];
 
     this.setState(st => ({
       colors: [...st.colors, randomColor]
     }));
+
   }
 
   clearPalette = () => {

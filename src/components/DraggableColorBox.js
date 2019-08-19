@@ -5,8 +5,7 @@ import {
   Root,
   ColorBox,
   BoxContent,
-  TextContent,
-  DeleteButton
+  TextContent
 } from '../styles/DraggableColorBoxStyles';
 
 const DraggableColorBox = SortableElement(props => {
