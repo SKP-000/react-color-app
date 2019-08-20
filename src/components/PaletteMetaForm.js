@@ -47,15 +47,6 @@ export default class PaletteMetaForm extends Component {
 
     savePalette(newPalette);
     history.push('/');
-
-    /*const { savePalette, history, colors } = this.props;
-    const newPalette = {
-      paletteName: newPaletteName,
-      id: newPaletteName.toLowerCase().replace(/ /g, '-'),
-      colors
-    }
-    savePalette(newPalette);
-    history.push('/');*/
   }
 
   handleSave = (emoji) => {

@@ -88,7 +88,7 @@ const styles = (theme => ({
 class NewPaletteForm extends Component {
   state = {
     open: false,
-    colors: this.props.palettes[0].colors,
+    colors: this.props.palettes[0] ? this.props.palettes[0].colors : [],
   }
 
   /**

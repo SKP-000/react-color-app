@@ -18,7 +18,7 @@ class PaletteList extends Component {
   }
 
   render() {
-    const { palettes } = this.props;
+    const { palettes, removePalette } = this.props;
     return (
       <Root>
         <GlobalStyle />
@@ -38,6 +38,7 @@ class PaletteList extends Component {
             {palettes.map(palette => 
               <MiniPalette
                 {...palette}
+                removePalette={removePalette}
                 key={palette.paletteName}
                 goToPalette={this.goToPalette}
                 />

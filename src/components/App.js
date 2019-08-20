@@ -26,21 +26,27 @@ class App extends Component {
     window.localStorage.setItem('palettes', JSON.stringify(palettes));
   }
 
-  savePalette = async(newPalette) => {
-    // sets state and then syncs the palettes to localStorage
+  savePalette = async (newPalette) => {
     await this.promisedSetState(st => (
       { palettes: [...st.palettes, newPalette] }
     ));
     this.syncLocalStorage();
   }
 
-  // returns a Promise version of setState which we can then use the async/await syntax on
+  removePalette = async (id) => {
+    await this.promisedSetState(st => (
+      { palettes: st.palettes.filter(palette => palette.id !== id)}
+    ));
+    this.syncLocalStorage();
+  }
+
+  // returns a promise version of setState which we can then use the async/await syntax on
   promisedSetState = (newState) => {
     return new Promise(resolve => {
       this.setState(newState, () => {
         resolve();
       })
-    })
+    });
   }
 
   render() {
@@ -65,6 +71,7 @@ class App extends Component {
             render={routeProps =>
             <PaletteList 
               palettes={palettes}
+              removePalette={this.removePalette}
               {...routeProps}
             />
             } 
@@ -81,10 +88,12 @@ class App extends Component {
           <Route 
             exact
             path="/palette/:paletteId/:colorId"
-            render={routeProps => <SingleColorPalette
+            render={routeProps =>
+              <SingleColorPalette
               palette={generatePalette(this.findPalette(routeProps.match.params.paletteId))}
               colorId={routeProps.match.params.colorId}
-              />}
+              />
+            }
           />
         </Switch>
       </div>
