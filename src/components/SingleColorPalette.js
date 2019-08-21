@@ -58,10 +58,17 @@ class SingleColorPalette extends Component {
     }, 2000);
   }
   
+  // a function which gets us a responsive height based on the width of the viewport
   getHeight = () => {
     const viewportWidth = window.innerWidth;
-    console.log(viewportWidth);
-    const height = viewportWidth < 600 ? '10%' : '50%';
+    let height;
+    if (viewportWidth < 600) {
+      height = '10%';
+    } else if (viewportWidth < 1200 && viewportWidth > 600) {
+      height = '20%';
+    } else {
+      height = '50%';
+    }
     return height;
   }
 

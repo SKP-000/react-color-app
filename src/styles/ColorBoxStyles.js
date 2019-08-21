@@ -91,11 +91,11 @@ export const Root = styled.div`
   height: ${props => props.height ? props.height : '25%'};
   width: 20%;
   ${sizes.down('lg')} {
-    width: 25%;
+    width: 50%;
     height: ${props => props.height ? props.height : '20%'}
   }
   ${sizes.down('md')} {
-    height: 10%;
+    height: ${props => props.height ? props.height : '10%'};
     width: 50%;
   }
   ${sizes.down('xs')} {
@@ -156,8 +156,8 @@ export const GoBack = styled.div`
     font-weight: 700;
 
     ${sizes.down('xs')} {
-      font-size: .9rem;
-      padding: .2rem .6rem;
+      font-size: .8rem;
+      padding: .1rem .2rem;
     }
 
     transition: all .3s;
@@ -272,6 +272,10 @@ export const CopyMsg = styled.div`
 
     margin-bottom: 2rem;
     padding: 1rem;
+
+    ${sizes.down('xs')} {
+      font-size: 3.5rem;
+    }
   }
 
   h2 {
@@ -279,6 +283,11 @@ export const CopyMsg = styled.div`
     text-shadow: 1px 2px black;
     font-size: 2.3rem;
     font-weight: 300;
+
+    ${sizes.down('xs')} {
+      font-size: 1.2rem;
+      text-shadow: .5px .75px black;
+    }
   }
 
 `;
