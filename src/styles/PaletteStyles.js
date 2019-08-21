@@ -15,7 +15,6 @@ export const PaletteColors = styled.div`
   flex-wrap: wrap;
   flex-direction: row;
   align-content: baseline;
-  overflow: hidden;
 
   height: 85%; /* Translates to 85vh */
   ${sizes.down('xs')} {
