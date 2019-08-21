@@ -1,5 +1,8 @@
 import chroma from 'chroma-js';
 import styled, { keyframes, css } from 'styled-components';
+import sizes from './sizes';
+
+// TODO: GIVE GO BACK BUTTON THE BACKGROUND IMAGE OF THE LANDING PAGE OF THE APP
 
 // EXPORTS:
 // CopyButton
@@ -77,11 +80,28 @@ export const CopyButton = styled.button`
     margin-bottom: 4px;
   }
 
+  ${sizes.down('xs')} {
+    font-size: .8rem;
+    padding: .1rem .2rem;
+  }
+
 `;
 
 export const Root = styled.div`
   height: ${props => props.height ? props.height : '25%'};
   width: 20%;
+  ${sizes.down('lg')} {
+    width: 25%;
+    height: ${props => props.height ? props.height : '20%'}
+  }
+  ${sizes.down('md')} {
+    height: 10%;
+    width: 50%;
+  }
+  ${sizes.down('xs')} {
+    width: 100%;
+    height: ${props => props.height ? props.height : '5%'};
+  }
   background: ${props => props.background};
   margin: 0;
   position: relative;
@@ -135,6 +155,11 @@ export const GoBack = styled.div`
     font-family: inherit;
     font-weight: 700;
 
+    ${sizes.down('xs')} {
+      font-size: .9rem;
+      padding: .2rem .6rem;
+    }
+
     transition: all .3s;
   }
 
@@ -178,6 +203,7 @@ export const SeeMore = styled.span`
   &:hover {
     animation: ${bobright} .5s infinite;
   }
+
 `;
 
 export const CopyOverlay = styled.div`

@@ -14,8 +14,15 @@ class SingleColorPalette extends Component {
 
     this.state = {
       format: 'hex',
-      snackbarOpen: false
+      snackbarOpen: false,
+      copied: false
     }
+  }
+
+  changeParentCopy = evt => {
+    this.setState({ copied: true }, () => {
+      setTimeout(() => this.setState({ copied: false }), 1500);
+    });
   }
 
   // loops through the levels, returning a shades array
@@ -50,9 +57,16 @@ class SingleColorPalette extends Component {
       this.setState({ snackbarOpen: false })
     }, 2000);
   }
+  
+  getHeight = () => {
+    const viewportWidth = window.innerWidth;
+    console.log(viewportWidth);
+    const height = viewportWidth < 600 ? '10%' : '50%';
+    return height;
+  }
 
   render() {
-    const { format } = this.state;
+    const { format, copied } = this.state;
     const { palette } = this.props;
     const { paletteName, emoji } = this.props.palette;
 
@@ -61,14 +75,16 @@ class SingleColorPalette extends Component {
         name={color.name} 
         key={color.name}
         background={color[format]}
-        height={'50%'}
+        copied={copied}
+        changeParentCopy={this.changeParentCopy}
+        height={this.getHeight()}
         showLink={false}
         canCopy
       />
     ));
 
     return (
-      <Root>
+      <Root copied={copied}>
         <Navbar 
           colorFormat={this.state.format}
           handleChange={this.changeFormat}
@@ -80,7 +96,7 @@ class SingleColorPalette extends Component {
           {colorBoxes}
           <ColorBox
             background={'#000'}
-            height={'50%'}
+            height={this.getHeight()}
             paletteId={palette.id}
             isGoBackBox
           />

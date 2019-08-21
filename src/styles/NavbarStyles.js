@@ -17,6 +17,7 @@ export const Root = styled.header`
   display: flex;
   align-items: center;
   height: 8vh;
+  align-content: flex-start;
 `;
 
 export const Logo = styled.div`

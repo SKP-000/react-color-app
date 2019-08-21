@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import async from 'async';
 import { Link } from 'react-router-dom';
 import {
   CopyButton,
@@ -25,10 +26,18 @@ export default class ColorBox extends Component {
     evt.stopPropagation();
   }
 
+  // changes local copy state
   changeCopyState = evt => {
     this.setState({ copied: true }, () => {
       setTimeout(() => this.setState({ copied: false }), 1500);
     });
+  }
+
+  // changes copy state of both parent (Palette) and child (ColorBox)
+  changeCopyBoth = () => {
+    const { changeParentCopy } = this.props;
+    const stack = [changeParentCopy, this.changeCopyState]
+    async.parallel(stack);
   }
 
   render() {
@@ -78,7 +87,7 @@ export default class ColorBox extends Component {
         </BoxContent>
         
         {canCopy && (
-          <CopyToClipboard text={background} onCopy={this.changeCopyState}>
+          <CopyToClipboard text={background} onCopy={this.changeCopyBoth}>
             <div> 
               <ButtonContainer>
                 <CopyButton>Copy</CopyButton>

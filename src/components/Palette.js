@@ -19,7 +19,14 @@ class Palette extends Component {
     level: 500,
     format: 'hex',
     snackbarOpen: false,
-    colorFormat: 'HEX - #AB7C90'
+    colorFormat: 'HEX - #AB7C90',
+    copied: false
+  }
+
+  changeParentCopy = evt => {
+    this.setState({ copied: true }, () => {
+      setTimeout(() => this.setState({ copied: false }), 1500);
+    });
   }
 
   changeLevel = (level) => {
@@ -52,7 +59,7 @@ class Palette extends Component {
 
   render() {
     const { colors, paletteName, emoji, id: paletteId } = this.props.palette;
-    const { level } = this.state;
+    const { level, copied } = this.state;
     const ColorBoxes = colors[level].map(colorDetails => (
       <ColorBox
         background={colorDetails[this.state.format]}
@@ -60,13 +67,15 @@ class Palette extends Component {
         key={colorDetails.id}
         id={colorDetails.id}
         paletteId={paletteId}
+        copied={copied}
+        changeParentCopy={this.changeParentCopy}
         showLink
         canCopy
       />
     ));
 
     return (
-      <Root>
+      <Root copied={copied}>
         <Navbar
           level={level}
           changeLevel={this.changeLevel}
