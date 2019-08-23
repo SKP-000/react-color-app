@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Root = styled.div`
   display: flex;
@@ -72,5 +72,7 @@ export const Delete = styled.div`
     transition: all .3s ease-in-out;
     border-bottom-left-radius: 5px;
   }
+
+  ${props => props.deleted && css`display: none`}
 
 `;

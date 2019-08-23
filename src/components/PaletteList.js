@@ -8,6 +8,7 @@ import {
   Nav,
   Palettes
 } from '../styles/PaletteListStyles';
+import { CSSTransition } from 'react-transition-group';
 
 
 
@@ -35,14 +36,20 @@ class PaletteList extends Component {
           </Nav>
 
           <Palettes>
-            {palettes.map(palette => 
-              <MiniPalette
-                {...palette}
-                removePalette={removePalette}
-                key={palette.paletteName}
-                goToPalette={this.goToPalette}
-                />
-            )}
+              {palettes.map(palette =>
+                <CSSTransition
+                  key={palette.id}
+                  classNames='fade'
+                  timeout={5000}
+                >
+                  <MiniPalette
+                    {...palette}
+                    removePalette={removePalette}
+                    key={palette.paletteName}
+                    goToPalette={this.goToPalette}
+                    />
+                </CSSTransition>  
+              )} 
           </Palettes>
 
         </Container>

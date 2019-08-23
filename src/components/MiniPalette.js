@@ -10,25 +10,30 @@ import {
 
 class MiniPalette extends Component {
 
+  state = {
+    deleted: false
+  }
+
   handleClick = () => {
-    this.props.goToPalette(this.props.id);
+    !this.state.deleted && this.props.goToPalette(this.props.id);
   }
 
   deletePalette = evt => {
     evt.stopPropagation();
     const { id, removePalette } = this.props;
-    removePalette(id);
+    this.setState({ deleted: true }, () => removePalette(id));
   }
 
   render() {
     const { paletteName: name, emoji, colors } = this.props;
+    const { deleted } = this.state;
     const miniColorBoxes = colors.map(color => (
       <MiniColor style={{ background: color.color }} key={color.name} />
     ))
 
     return (
       <Root color="#000" fontColor="#fca" onClick={this.handleClick}>
-        <Delete>
+        <Delete deleted={deleted}>
           <DeleteIcon
             className='deleteIcon'
             onClick={this.deletePalette}
