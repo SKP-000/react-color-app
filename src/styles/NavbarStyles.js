@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import sizes from './sizes';
 
 const fadeIn = keyframes`
   0% {
@@ -33,6 +34,10 @@ export const Logo = styled.div`
   align-items: center;
   text-decoration: none;
   color: black;
+
+  ${sizes.down('xs')} {
+    display: none;
+  }
 `;
 
 export const LogoLink = styled.a`
@@ -82,6 +87,14 @@ export const SliderContainer = styled.div`
     margin-top: -3px;
   }
 
+  ${sizes.down('md')} {
+    width: 200px;
+    h1 {
+      margin-right: .5rem;
+      font-size: 16px;
+    } 
+  }
+
 `;
 
 export const SelectorContainer = styled.div`
@@ -91,6 +104,15 @@ export const SelectorContainer = styled.div`
     width: 20rem;
     text-align: center;
     font-weight: 300;
+  }
+
+  ${sizes.down('md')} {
+    margin-right: .5rem;
+    margin-left: 1rem;
+    .select {
+      width: 7.5rem;
+      font-size: 12px; 
+    }
   }
 
 `;

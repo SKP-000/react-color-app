@@ -183,6 +183,10 @@ export const BoxContent = styled.div`
   span {
     color: ${props => chroma.contrast(props.background, "black") > 6 ? '#000' : 'inherit'}
   }
+
+  ${sizes.down('xs')} {
+    width: fit-content;
+  }
   
 `;
 

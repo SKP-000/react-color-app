@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import chroma from 'chroma-js';
+import sizes from './sizes';
 
 export const TextContent = styled.div`
   display: inline-block;
@@ -9,7 +10,7 @@ export const Root = styled.div`
   height: ${props => props.height ? props.height : '25%'};
   width: 20%;
   margin: 0;
-  margin-top: -.8vh;
+  margin-top: -5px;
   flex: 1;
   position: relative;
   display: inline-block;
@@ -21,6 +22,22 @@ export const Root = styled.div`
   &:hover .delete-icon {
     color: rgba(255, 255, 255, 1);
     transform: scale(1.1);
+  }
+
+  ${sizes.down('lg')} {
+    width: 25%;
+    height: 20%;
+  }
+
+  ${sizes.down('md')} {
+    width: 50%;
+    height: 10%;
+  }
+
+  ${sizes.down('xs')} {
+    width: 100%;
+    height: 5%;
+    margin-top: 0px;
   }
 `;
 
