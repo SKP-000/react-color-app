@@ -186,6 +186,7 @@ export const BoxContent = styled.div`
 
   ${sizes.down('xs')} {
     width: fit-content;
+    font-size: 12px;
   }
   
 `;
@@ -206,6 +207,11 @@ export const SeeMore = styled.span`
 
   &:hover {
     animation: ${bobright} .5s infinite;
+  }
+
+  ${sizes.down('xs')} {
+    height: 100%;
+    border-radius: 0;
   }
 
 `;
