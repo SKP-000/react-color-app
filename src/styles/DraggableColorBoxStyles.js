@@ -10,7 +10,7 @@ export const Root = styled.div`
   height: ${props => props.height ? props.height : '25%'};
   width: 20%;
   margin: 0;
-  margin-top: -5px;
+  margin-top: -1vh;
   flex: 1;
   position: relative;
   display: inline-block;
