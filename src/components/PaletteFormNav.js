@@ -10,6 +10,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Button from '@material-ui/core/Button';
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import PaletteMetaForm from './PaletteMetaForm';
+import sizes from '../styles/sizes';
 
 const drawerWidth = 400;
 
@@ -39,11 +40,23 @@ const styles = (theme => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  title: {
+    [sizes.down('xs')]: {
+      display: 'none'
+    }
+  },
   subButton: {
     color: '#202020',
     border: '1.5px solid #000',
     fontWeight: '700',
     margin: '10px',
+  },
+  submitBtn: {
+    backgroundColor: '#202020',
+    color: '#fff',
+    '&:hover, &:active': {
+      backgroundColor: '#303030'
+    }
   },
   hide: {
     display: 'none',
@@ -58,7 +71,12 @@ const styles = (theme => ({
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
+
+    [sizes.down('xs')]: {
+      marginRight: '10%',
+      whiteSpace: 'nowrap'
+    }  
   }
 }));
 
@@ -106,17 +124,17 @@ class PaletteFormNav extends Component {
             >
               <AddToPhotosIcon />
             </IconButton>
-            <Typography variant="h6" noWrap>
+            <Typography variant="h6" noWrap className={classes.title}>
               Create Palette
             </Typography>          
           </Toolbar>
 
           <div className={classes.navBtns}>
             <Button
-              variant="contained"
-              style={{ backgroundColor: '#202020' }}
-              color="primary"
+              variant='contained'
+              className={classes.submitBtn}
               onClick={this.handleShowForm}
+              color='inherit'
             >
               Submit Palette
             </Button>
