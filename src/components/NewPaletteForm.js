@@ -10,8 +10,14 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
-
+import { createGlobalStyle } from 'styled-components';
 // TODO: REFACTOR THIS COMPONENT TO USE STYLED-COMPONENTS INSTEAD OF MATERIAL-UI's IN-HOUSE STYLING SOLUTION
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    overflow: hidden;
+  }
+`
 
 const drawerWidth = 400;
 
@@ -197,11 +203,11 @@ class NewPaletteForm extends Component {
 
     return (
       <div className={classes.root}>
+        <GlobalStyle />
         <PaletteFormNav
           open={open}
           palettes={palettes}
           handleDrawerOpen={this.handleDrawerOpen}
-          //handleSubmit={this.handleSubmit}
           savePalette={savePalette}
           history={history}
           colors={colors}
