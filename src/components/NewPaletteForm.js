@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PaletteFormNav from './PaletteFormNav';
 import ColorPickerForm from './ColorPickerForm';
 import DraggableColorList from './DraggableColorList';
+import seedColors from '../seedColors';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
 import { createGlobalStyle } from 'styled-components';
@@ -99,7 +100,7 @@ const styles = (theme => ({
 class NewPaletteForm extends Component {
   state = {
     open: false,
-    colors: this.props.palettes[0] ? this.props.palettes[0].colors : [],
+    colors: this.props.palettes[0] ? this.props.palettes[0].colors : seedColors[0].colors,
   }
 
   /**
