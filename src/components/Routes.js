@@ -6,14 +6,11 @@ import Palette from './Palette';
 import SingleColorPalette from './SingleColorPalette';
 import NewPaletteForm from './NewPaletteForm';
 import Page from './Page';
+import bg from '../styles/svg-back.svg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
-  .fade-exit {
-    opacity: 1;
-  }
-
   .page-enter {
     transform: translateX(100%);
   }
