@@ -49,10 +49,13 @@ export const Nav = styled.nav`
   display: flex;
   color: white;
   width: 100%;
+  border-radius: 15px;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  color: #f6b906;
+  background-color: #fff;
+  padding: 1rem;
+  color: #202020;
 
   a {
     text-decoration: none;
@@ -93,6 +96,7 @@ export const Palettes = styled(TransitionGroup)`
   box-sizing: border-box;
   width: 100%;
   display: grid;
+  justify-content: center;
   grid-template-columns: repeat(3, 30%);
   grid-gap: 1.5rem;
 
