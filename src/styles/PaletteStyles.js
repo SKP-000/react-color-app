@@ -7,6 +7,7 @@ export const Root = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  background-color: #fff;
 `;
 
 // Palette div contains all the colors of that palette
