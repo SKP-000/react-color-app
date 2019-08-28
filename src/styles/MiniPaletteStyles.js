@@ -12,7 +12,6 @@ export const Root = styled.div`
   position: relative;
   overflow: hidden;
   cursor: pointer;
-  overflow: hidden;
 
   &:hover .deleteIcon {
     opacity: 1;
