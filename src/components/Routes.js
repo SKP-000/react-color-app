@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
 
   .fade-exit-active {
     opacity: 0;
-    transition: opacity 500ms;
+    transition: opacity 800ms;
   }
 `;
 
@@ -44,8 +44,8 @@ export default class Routes extends Component {
           <TransitionGroup>
             <CSSTransition
               key={location.key}
-              classNames={'page'}
-              timeout={1000}
+              classNames={'fade'}
+              timeout={800}
             >
               <Switch location={location}>
                 <Route 
