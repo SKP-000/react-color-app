@@ -8,7 +8,7 @@ import NewPaletteForm from './NewPaletteForm';
 import Page from './Page';
 import bg from '../styles/svg-back.svg';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { createGlobalStyle, css } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   .page-enter {
@@ -30,7 +30,7 @@ const GlobalStyle = createGlobalStyle`
     background-color: #387eaa;
     background-image: url(${bg});
   }
-  
+
   .fade-exit-active {
     opacity: 0;
     transition: opacity 800ms;
