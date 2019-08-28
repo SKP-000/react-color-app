@@ -65,16 +65,14 @@ export const Nav = styled.nav`
     font-weight: 700;
     text-transform: uppercase;
     margin-top: 7px;
-    margin-right: 1rem;
+    &:last-of-type {
+      margin-left: 2rem;
+    }
 
     &:hover {
       text-decoration: underline;
     }
     
-  }
-
-  .links {
-    margin-right: 2rem;
   }
 
   h1 {
