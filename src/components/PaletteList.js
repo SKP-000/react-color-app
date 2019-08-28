@@ -40,6 +40,11 @@ class PaletteList extends Component {
     this.props.history.push(`/palette/${id}`);
   }
 
+  restorePalettes = () => {
+    window.localStorage.clear();
+    window.location.reload();
+  }
+
   handleDelete = () => {
     const { removePalette } = this.props;
     const { deletingId } = this.state;
@@ -56,12 +61,21 @@ class PaletteList extends Component {
           
           <Nav>
             <h1>React Colors App</h1>
-            <Link
-              exact='true'
-              to='/palette/new'
-            >
-              Create Palette
-            </Link>
+            <div className="links">
+              <Link
+                exact='true'
+                to='/palette/new'
+              >
+                Create Palette
+              </Link>
+              <Link
+                exact='true'
+                to='/'
+                onClick={this.restorePalettes}
+              >
+                Restore Palettes
+              </Link>
+            </div>
           </Nav>
 
           <Palettes>
