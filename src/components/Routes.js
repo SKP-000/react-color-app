@@ -28,6 +28,12 @@ const GlobalStyle = createGlobalStyle`
     transition: transform 1s;
   }
 
+  .fade-exit {
+    opacity: 1;
+    background-color: #387eaa;
+    background-image: url(${bg});
+  }
+  
   .fade-exit-active {
     opacity: 0;
     transition: opacity 800ms;
