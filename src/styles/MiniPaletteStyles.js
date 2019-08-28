@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Root = styled.div`
   display: flex;
@@ -12,6 +12,7 @@ export const Root = styled.div`
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  overflow: hidden;
 
   &:hover .deleteIcon {
     opacity: 1;
@@ -21,9 +22,11 @@ export const Root = styled.div`
 `;
 
 export const Colors = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
   height: 110px;
   width: 100%;
-
   border-radius: 5px;
   overflow: hidden;
 `;
@@ -34,8 +37,6 @@ export const Title = styled.h5`
   justify-content: space-between;
   margin: 0;
   font-size: 1rem;
-  padding-top: 0.5rem;
-  position: relative;
 
   /* Styling for Emoji */
   span {
@@ -50,12 +51,9 @@ export const MiniColor = styled.div`
   display: inline-block;
   margin: 0;
   position: relative;
-  margin-bottom: -3.5px;
 `;
 
 export const Delete = styled.div`
-  /*height: 18%;
-  width: 15%;*/
   position: absolute;
   top: 0;
   right: 0;
@@ -72,7 +70,5 @@ export const Delete = styled.div`
     transition: all .3s ease-in-out;
     border-bottom-left-radius: 5px;
   }
-
-  ${props => props.deleted && css`display: none`}
 
 `;
