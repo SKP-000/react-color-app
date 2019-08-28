@@ -27,7 +27,6 @@ export const Logo = styled.div`
   font-size: 22px;
   margin-right: auto;
   padding: 0 13px;
-  font-family: Roboto;
   align-self: stretch;
 
   display: flex;
