@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { generatePalette } from '../colorHelper';
-import PaletteList from './PaletteList';
-import Palette from './Palette';
+import Routes from './Routes';
 import seedColors from '../seedColors';
-import SingleColorPalette from './SingleColorPalette';
-import NewPaletteForm from './NewPaletteForm';
 
 class App extends Component {
   _savedPalettes = JSON.parse(window.localStorage.getItem('palettes'));
@@ -34,6 +29,7 @@ class App extends Component {
   }
 
   removePalette = async (id) => {
+    // setState will happen instantly since our app isn't that big but just to be safe, we await until the state is set proper before we sync the data to localStorage
     await this.promisedSetState(st => (
       { palettes: st.palettes.filter(palette => palette.id !== id)}
     ));
@@ -50,53 +46,13 @@ class App extends Component {
   }
 
   render() {
-    const { palettes } = this.state;
     return (
-      <div>
-        <Switch>
-          <Route 
-            exact
-            path="/palette/new"
-            render={(routeProps) =>
-              <NewPaletteForm
-                savePalette={this.savePalette}
-                {...routeProps}
-                palettes={this.state.palettes}
-              />
-            }
-          />
-          <Route
-            exact
-            path="/"
-            render={routeProps =>
-            <PaletteList 
-              palettes={palettes}
-              removePalette={this.removePalette}
-              {...routeProps}
-            />
-            } 
-          />
-          <Route
-            exact
-            path="/palette/:id"
-            render={routeProps =>
-              <Palette
-                palette={generatePalette(this.findPalette(routeProps.match.params.id))} 
-              />
-            } 
-          />
-          <Route 
-            exact
-            path="/palette/:paletteId/:colorId"
-            render={routeProps =>
-              <SingleColorPalette
-              palette={generatePalette(this.findPalette(routeProps.match.params.paletteId))}
-              colorId={routeProps.match.params.colorId}
-              />
-            }
-          />
-        </Switch>
-      </div>
+      <Routes 
+        removePalette={this.removePalette}
+        savePalette={this.savePalette}
+        findPalette={this.findPalette}
+        palettes={this.state.palettes}
+      />
     )
   }
 }
