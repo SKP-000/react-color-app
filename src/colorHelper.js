@@ -38,6 +38,8 @@ const levels = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
  * - After all this is done, in the generatePalette function we then finally define our values in the color object i.e the levels (50, 100, 200, etc) and push the color scale into the array
  */
 
+ // soorya from the future here and holy hell is this algorithm inefficent. there has to be a better way. hopefully I'll be remind myself to fix this after I learn more about data structures and algorithms
+
  // main function
 function generatePalette(starterPalette) {
   let newPalette = {
