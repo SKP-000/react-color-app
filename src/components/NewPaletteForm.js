@@ -4,22 +4,27 @@ import ColorPickerForm from './ColorPickerForm';
 import DraggableColorList from './DraggableColorList';
 import clsx from 'clsx';
 import { withStyles } from '@material-ui/core/styles';
+import { createGlobalStyle } from 'styled-components';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
-import { createGlobalStyle } from 'styled-components';
 // TODO: REFACTOR THIS COMPONENT TO USE STYLED-COMPONENTS INSTEAD OF MATERIAL-UI's IN-HOUSE STYLING SOLUTION
 
+const drawerWidth = 400;
+
+// a global style to override the default properties inherited from body when on the /palette/new route
+// yes, I know. I used !important as a last resort, didn't see any other way of fixing this annoying issue. If I had to guess it is probably the material ui stuff which overrides the default body values
 const GlobalStyle = createGlobalStyle`
   body {
-    overflow: hidden;
+    letter-spacing: normal !important;
+    line-height: normal !important;
+    font-family: 'Lato', sans-serif !important;
+    font-size: 100% !important;
   }
-`
-
-const drawerWidth = 400;
+`;
 
 const styles = (theme => ({
   root: {
