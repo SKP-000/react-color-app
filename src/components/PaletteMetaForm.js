@@ -46,7 +46,7 @@ export default class PaletteMetaForm extends Component {
     }
 
     savePalette(newPalette);
-    history.push('/');
+    this.setState({ stage: '' }, () => history.push('/'));
   }
 
   handleSave = (emoji) => {
@@ -87,6 +87,7 @@ export default class PaletteMetaForm extends Component {
                 className={classes.paletteInput}
                 name='newPaletteName'
                 label='Palette Name'
+                autoFocus
                 value={newPaletteName}
                 onChange={this.handleChange}
                 fullWidth
