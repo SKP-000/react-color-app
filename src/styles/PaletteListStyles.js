@@ -52,7 +52,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1rem;
-  color: #fff;
+  color: #f6b906;
 
   a {
     text-decoration: none;
@@ -62,11 +62,16 @@ export const Nav = styled.nav`
     font-weight: 700;
     text-transform: uppercase;
     margin-top: 7px;
+    margin-right: 1rem;
 
     &:hover {
       text-decoration: underline;
     }
     
+  }
+
+  .links {
+    margin-right: 2rem;
   }
 
   h1 {
